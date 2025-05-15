@@ -5,6 +5,8 @@ import './recipes.css';
 // import BarcodeScanner from './pages/scanner/Scanner.tsx';
 
 import BarcodeScanner from '../scanner/Scanner.tsx';
+import { useNavigate } from 'react-router-dom'; // 🔥 import this
+import './recipes.css';
 
 
 
@@ -16,6 +18,7 @@ const Recipes = () => {
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
   const [scannedBarcode, setScannedBarcode] = useState('');
+  const navigate = useNavigate(); // ✅ Add this here
 
   const fetchProductDetails = async (barcode) => {
     try {
@@ -38,6 +41,11 @@ const Recipes = () => {
   const handleBarcodeDetected = (barcode) => {
     setScannedBarcode(barcode);
     fetchProductDetails(barcode);
+  };
+  
+  const handleAnalyze = () => { // ✅ Define your missing function
+    if (!product) return;
+    navigate('/chatbot', { state: { product } });
   };
 
   return (
@@ -72,12 +80,18 @@ const Recipes = () => {
                 <tr><td><strong>Categories:</strong> {product.categories}</td></tr>
                 <tr><td><strong>Nutrition Grade:</strong> {product.nutrition_grades}</td></tr>
                 <tr><td><img src={product.image_url} alt={product.product_name} width="120" /></td></tr>
+                <button className="analyze-btn" onClick={handleAnalyze}>
+        🔍 Analyze
+      </button>
               </>
             ) : (
               <tr><td>{error || 'Upload an image to scan a barcode.'}</td></tr>
             )}
           </tbody>
         </table>
+        {/* <button className="analyze-btn" onClick={handleAnalyze}>
+                      🔍 Analyze
+                    </button> */}
       </div>
     </div>
   );

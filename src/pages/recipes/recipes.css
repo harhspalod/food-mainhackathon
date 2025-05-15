@@ -20,6 +20,22 @@
   align-items: center;
   
 }
+.analyze-btn {
+  padding: 10px 20px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.analyze-btn:hover {
+  background-color: #e67e00;
+}
+
 
 .ingredients2 {
   background-color: rgb(66, 16, 5, 0.3);

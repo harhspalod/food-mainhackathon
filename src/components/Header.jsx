@@ -10,8 +10,16 @@ export default function Header() {
           <p className="introducing">Introducing...</p>
           <h1 className="food-scan">FOOD SCAN</h1>
           <p className="description">
-            Compare any two food products! Scan packaged items or natural foods to see their nutritional values and make healthier choices.
-          </p>  
+          Pick a juice product like Frooti or Maaza, analyze its nutrition, and compare it with similar drinks to suggest a healthier alternative.
+
+
+
+
+
+
+
+
+</p>  
         </div>
       
         <div className="main_header-right">
