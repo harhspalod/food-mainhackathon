@@ -180,8 +180,8 @@ const keywords = [
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // const GEMINI_API_KEY = 'AIzaSyCIgr_B2mIZgPSrOiLETDxaO8HsnDKCKSY';
-  const GEMINI_API_KEY ='';
+  const GEMINI_API_KEY = 'AIzaSyCIgr_B2mIZgPSrOiLETDxaO8HsnDKCKSY';
+  // const GEMINI_API_KEY ='';
   const sendToGemini = async (userInput) => {
     const updatedMessages = [
       ...messages,
