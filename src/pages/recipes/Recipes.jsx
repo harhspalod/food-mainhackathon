@@ -22,8 +22,11 @@ const Recipes = () => {
 
   const fetchProductDetails = async (barcode) => {
     try {
-      const response = await axios.get(`https://world.openfoodfacts.net/api/v2/product/${barcode}`);
-      if (response.data && response.data.product) {
+      const proxy = "https://corsproxy.io/?";
+      const response = await axios.get(
+        `https://thingproxy.freeboard.io/fetch/https://world.openfoodfacts.org/api/v2/product/${barcode}`
+      );
+            if (response.data && response.data.product) {
         setProduct(response.data.product);
         setError('');
       } else {
@@ -36,6 +39,7 @@ const Recipes = () => {
       setError('Failed to fetch product.');
     }
   };
+  
 
   // Called when BarcodeScanner detects a code
   const handleBarcodeDetected = (barcode) => {
