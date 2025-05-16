@@ -1,50 +1,96 @@
+
+
+/* Make parent container full height */
 .history-container {
-  background-image: url(../../images/background.jpg);
+  display: flex;
+  justify-content: center;       /* Horizontal center */
+  align-items: center;           /* Vertical center */
+  height: 100vh;                 /* Full viewport height */
   background-size: cover;
-  min-height: 100vh;
-  padding: 2rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  
 }
 
-.history-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: 4rem;
+
+/* Child: Robot center content */
+.robot-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.history-title {
-  color: white;
+.robot-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin-bottom: 2rem;
-  font-family: 'Press Start 2P', cursive;
+  position: relative;
+  animation: float 3s ease-in-out infinite;
 }
 
-.history-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+
+.robot-image {
+  width: 250px;
+  height: 275px;
 }
 
-.history-card {
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
-  padding: 1.5rem;
+.chat-bubble {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #00bcd4;
   color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.history-card-header h3 {
-  color: #B27C68;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+.robot-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin-top: 0.5rem;
 }
 
-.history-card-products {
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+.chatbox {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
-.history-card-recommendation {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
-  line-height: 1.4;
+.chatbox input {
+  width: 300px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+.chatbox button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #00bcd4;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.chat-response {
+  margin-top: 1rem;
+  padding: 10px 16px;
+  background-color: #f0f9ff;
+  border-left: 3px solid #00bcd4;
+  max-width: 400px;
+  border-radius: 8px;
+  color: #333;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }

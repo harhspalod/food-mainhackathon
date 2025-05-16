@@ -146,6 +146,8 @@ const floatAnimation = {
   animation: 'float 3s ease-in-out infinite'
 };
 
+const followUps = ["Why?", "Any better option?", "Can I eat it daily?"];
+
 // Inject keyframes into the page
 const keyframes = `
 @keyframes float {
@@ -164,7 +166,16 @@ try {
   console.warn("⚠️ Failed to insert rule:", e.message);
 }
 
+
+function highlightHeartWordsMarkdown(text) {
+  const keywords = ['heart', 'cardiovascular', 'blood pressure', 'cholesterol'];
+  const regex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'gi');
+  return text.replace(regex, (match) => `**❤️ ${match}**`);
+}
+
   
+
+
   
 const ChatBot = () => {
 const keywords = [
@@ -181,6 +192,7 @@ const keywords = [
   const [loading, setLoading] = useState(false);
 
   const GEMINI_API_KEY = 'AIzaSyCIgr_B2mIZgPSrOiLETDxaO8HsnDKCKSY';
+
   // const GEMINI_API_KEY ='';
   const sendToGemini = async (userInput) => {
     const updatedMessages = [
@@ -207,6 +219,8 @@ const keywords = [
 
       const data = await response.json();
       const aiText = data?.candidates?.[0]?.content?.parts?.[0]?.text || '❌ No response';
+      const highlightedText = highlightHeartWordsMarkdown(aiText);
+
 
       setMessages([...updatedMessages, { role: 'ai', text: aiText }]);
     } catch (err) {
@@ -219,26 +233,29 @@ const keywords = [
 
   useEffect(() => {
     if (product) {
-      const analysisPrompt = `You are Food Scanner 🍽️ — a smart food health expert.
-
-A user scanned the following product:
+      const analysisPrompt = `You are Food Scanner 🍽️ — a friendly food health expert.
 
 🛍 Product: ${product.product_name}  
 🥣 Ingredients: ${product.ingredients_text}  
 📊 Nutrition Grade: ${product.nutrition_grades}  
 
-Give a clean, Morder report:
+Start by saying:
 
-1. 🔍 Is it healthy or not? Say why in 1 line.  
-2. 🥇  Just tell which one is healtier and why?
-3. ⏳ Estimate freshness & shelf life to do it give a rough guess dont show that it is rough guess just like that tell it.  
-4. ✅ Final verdict: Is it safe for daily use? Add 1 health tip .  
-Keep it short, casual, and udont go in depth expalaination color of text should be dark.
-`;
+Now, answer this clearly:
+Is this product good for heart health?  
+Reply with only one word: "Yes" or "No". Do not explain. funtil the user tells to Explain
 
-      sendToGemini(analysisPrompt, true);
+
+If the user later types something like "Why?" or "Explain", then give a simple 1-line reason and suggest a better snack.
+if i say Any better option? then directly say the name no guess i think say nuts direclty or anything one word answer.
+direcly give no or yes no need to answer anything this is prouct name and all 
+
+Keep it short, casual, and easy to understand.`;
+
+      sendToGemini(analysisPrompt);
     }
   }, [product]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -292,19 +309,18 @@ Keep it short, casual, and udont go in depth expalaination color of text should 
        
       <h2 style={styles.header}>🥗 Food AI Product Chat</h2>
       {product && (
-        <div style={styles.productCard}>
-          <p>  <img
-      src={product.image_url}
-      alt={product.product_name}
-      style={{
-        width: '100px',
-        height: '100px',
-        objectFit: 'contain'
-      }} />
-      </p>
-        
-        </div>
-      )}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img
+    src={`https://images.weserv.nl/?url=${encodeURIComponent(product.image_url?.replace(/^https?:\/\//, ''))}`}
+    alt={product.product_name}
+    width="120"
+  />
+</div>
+
+)}
+
+   
+   
      
 
       <div style={{ ...styles.chatBox, display: 'flex', flexDirection: 'column' }}>
@@ -320,6 +336,28 @@ Keep it short, casual, and udont go in depth expalaination color of text should 
 >
   {msg.text}
 </ReactMarkdown>
+
+{msg.role === 'ai' && idx === messages.length - 1 && (
+      <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+        {["Why?", "Any better option?", "Can I eat it daily?"].map((q, i) => (
+          <button
+            key={i}
+            onClick={() => sendToGemini(q)}
+            style={{
+              background: '#ffe082',
+              border: 'none',
+              borderRadius: '12px',
+              padding: '0.4rem 0.8rem',
+              cursor: 'pointer',
+              fontWeight: 500,
+              fontSize: '0.9rem'
+            }}
+          >
+            {q}
+          </button>
+        ))}
+      </div>
+)}
 
   </div>
 ))}
@@ -361,13 +399,16 @@ onMouseOut={(e) => e.currentTarget.style.background = '#dcedc8'}
           style={styles.input}
         />
         <button type="submit" disabled={loading} style={styles.button}>
-          🍏 Send
+          🍏 VIbe It
         </button>
       </form>
     </div>
     </div> 
   );
 };
+
+
+
 
 const styles = {
  centerWrapper: {

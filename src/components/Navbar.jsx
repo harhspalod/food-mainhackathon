@@ -42,7 +42,7 @@ const Navbar = () => {
             <NavLink to='/history'>
               <div className="btn">
                 <img className="logo3" src={Icon3} alt="History"/>
-                <p>History</p>
+                <p>Vibe</p>
               </div>
             </NavLink>
           </li>

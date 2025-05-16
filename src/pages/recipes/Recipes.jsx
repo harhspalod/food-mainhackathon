@@ -83,7 +83,11 @@ const Recipes = () => {
                 <tr><td><strong>Ingredients:</strong> {product.ingredients_text || 'N/A'}</td></tr>
                 <tr><td><strong>Categories:</strong> {product.categories}</td></tr>
                 <tr><td><strong>Nutrition Grade:</strong> {product.nutrition_grades}</td></tr>
-                <tr><td><img src={product.image_url} alt={product.product_name} width="120" /></td></tr>
+                <img
+  src={`https://images.weserv.nl/?url=${encodeURIComponent(product.image_url?.replace(/^https?:\/\//, ''))}`}
+  alt={product.product_name}
+  width="120"
+/>
                 <button className="analyze-btn" onClick={handleAnalyze}>
         🔍 Analyze
       </button>

@@ -26,9 +26,9 @@ export default function Header() {
           <div className="main_header-image">
             <img className="robot" src={Image2} alt="Robot"/>
           </div>
-          <div className="main_header-plate">
+          {/* <div className="main_header-plate">
             <img className="plate" src={Image1} alt="Plate"/>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>
