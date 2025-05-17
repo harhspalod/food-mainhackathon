@@ -21,22 +21,20 @@ This app allows users to scan juice products like Frooti or Maaza, analyze their
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/your-username/juice-nutrition-chatbot.git
-cd juice-nutrition-chatbot
-Install dependencies:
-
-bash
-Copy
-Edit
+git clone https://github.com/harhspalod/food-mainhackathon.git
+cd  food-mainhackathon.git
+``` 
+## Install dependencies:
+ 
+```bash
 npm install
-Insert your Open Food Facts API key:
+``` 
+## Insert your Gemini API key:
 
 Open the file:
-
-bash
-Copy
-Edit
+```bash
 src/pages/chatbot/chatBot.jsx
+``` 
 Go to line 194 and replace the placeholder with your API key:
 
 js
@@ -45,9 +43,7 @@ Edit
 const apiKey = "YOUR_API_KEY_HERE";
 Start the development server:
 
-bash
-Copy
-Edit
+## Run 
 npm start
 Visit: http://localhost:3000
 
@@ -60,7 +56,7 @@ Express (used briefly for proxy workaround)
 
 CSS Modules
 
-👨‍💻 Built With ❤️ By
+## 👨‍💻 Built With ❤️ By
 Harsh Palod
 
 Ankit Singh
